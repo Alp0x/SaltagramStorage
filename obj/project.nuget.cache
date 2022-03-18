@@ -1,8 +1,18 @@
 {
   "version": 2,
-  "dgSpecHash": "QpflJ9UPICVLghkC5GyEhFH2EJsqj3m54Jj9yexbm81lFbnogyXqKAWNMlPF3TWbqtt/vKZq28BD2Lf3DCQKTQ==",
+  "dgSpecHash": "O5g+V/EO1ABXg+vONdJvzaMruzTPqmZ+/ZlNC9RzpLNt+hn9g908ULlt+D8jAK61VWMsByDsTj9Zty5b6Wu6Zw==",
   "success": true,
   "projectFilePath": "/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/Saltagram.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "/Users/salt-dev/.nuget/packages/azure.core/1.22.0/azure.core.1.22.0.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/azure.data.tables/12.5.0/azure.data.tables.12.5.0.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/microsoft.bcl.asyncinterfaces/1.1.1/microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.diagnostics.diagnosticsource/4.6.0/system.diagnostics.diagnosticsource.4.6.0.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.memory.data/1.0.2/system.memory.data.1.0.2.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.text.encodings.web/4.7.2/system.text.encodings.web.4.7.2.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.text.json/4.7.2/system.text.json.4.7.2.nupkg.sha512",
+    "/Users/salt-dev/.nuget/packages/system.threading.tasks.extensions/4.5.4/system.threading.tasks.extensions.4.5.4.nupkg.sha512"
+  ],
   "logs": []
 }
