@@ -48,7 +48,7 @@ public class SaltController : Controller
                 { "Description", "A description" }
             };
         _client.AddEntity(Salt);
-        return RedirectToAction("Salts");
+        return View();
     }
     public IActionResult SaltProfile() // DETAILS WHERE U CAN UPDATE SPECIFIC SALT
     {

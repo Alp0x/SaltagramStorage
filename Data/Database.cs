@@ -17,18 +17,3 @@
 // CONNECT WITH ACCOUNT KEYCONNECT WITH ACCOUNT KEY
 // CONNECTION STRINGCONNECTION STRING
 
-// new Salt[]
-//         {
-//             new Salt{
-//                 Name = "Good Salt",
-//                 GrainSize = "Big",
-//                 Description = "Salty looking salty tasting",
-//                 SourceSize = "1000000"
-//             },
-//             new Salt{
-//                 Name = "Better Salt",
-//                 GrainSize = "Gigantic",
-//                 Description = "Saltier looking saltier tasting",
-//                 SourceSize = "1000"
-//             }
-//         }
