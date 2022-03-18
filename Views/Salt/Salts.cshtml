@@ -1,0 +1,18 @@
+@model IEnumerable<Salt>
+
+@{
+    ViewData["Title"] = "Salt info";
+}
+
+<section>
+    <h3>List of Salts</h3>
+    <ul>
+        @foreach (var salt in @Model)
+        {
+            <section>
+                <li>@salt.Name</li>
+            </section>
+        }
+        HELLLOOOOOO!
+    </ul>
+</section>
