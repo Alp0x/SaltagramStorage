@@ -16308,6 +16308,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/Views/Salt/AddSalt.cshtml",
+      "TargetPath": "Views\\Salt\\AddSalt.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/Views/Salt/Index.cshtml",
       "TargetPath": "Views\\Salt\\Index.cshtml",
       "FileKind": "mvc"
