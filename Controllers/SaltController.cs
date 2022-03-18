@@ -3,10 +3,12 @@ using Azure.Data.Tables;
 public class SaltController : Controller
 {
     private readonly TableClient _client;
+    private readonly TableServiceClient _serviceClient;
     public SaltController()
     {
         var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
         _client = new TableClient(connectionString, "SaltagramTable");
+        _serviceClient = new TableServiceClient(connectionString);
     }
     public IActionResult Index() //Welcomepage POST
     {
@@ -15,7 +17,21 @@ public class SaltController : Controller
 
     public IActionResult Salts() //Salt Gallery List LIKE/COMMENTS    PATCH
     {
-        return View();
+        return View(new Salt[]
+        {
+            new Salt{
+                Name = "Good Salt",
+                GrainSize = "Big",
+                Description = "Salty looking salty tasting",
+                SourceSize = "1000000"
+            },
+            new Salt{
+                Name = "Better Salt",
+                GrainSize = "Gigantic",
+                Description = "Saltier looking saltier tasting",
+                SourceSize = "1000"
+            }
+        });
     }
 
     public IActionResult Location() //LOCATION WHERE EACH SALT CAN BE FOUND
