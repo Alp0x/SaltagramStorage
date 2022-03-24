@@ -4,11 +4,10 @@ public class SaltController : Controller
 {
     private readonly TableClient _client;
     private readonly TableServiceClient _serviceClient;
-    public SaltController()
+    public SaltController(TableClient client, TableServiceClient serviceClient)
     {
-        var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-        _client = new TableClient(connectionString, "SaltagramTable");
-        _serviceClient = new TableServiceClient(connectionString);
+        _client = client;
+        _serviceClient = serviceClient;
     }
     public IActionResult Index() //Welcomepage POST
     {
@@ -39,6 +38,7 @@ public class SaltController : Controller
         return View("Location");
     }
 
+    [HttpPost("/AddSalt")]
     public IActionResult AddSalt()
     {
         var PartitionKey = "Salts";
@@ -47,6 +47,7 @@ public class SaltController : Controller
                 { "Name", "Table salt" },
                 { "Description", "A description" }
             };
+        _client.AddEntity(Salt);
         return View();
     }
 

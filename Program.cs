@@ -1,3 +1,5 @@
+using Azure.Data.Tables;
+using Azure.Data.Tables.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +11,19 @@ builder.Services
     .AddCookie(options => { options.LoginPath = "/login"; });
 var app = builder.Build();
 
+var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
+var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME"); ;
+var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
+
+builder.Services.AddSingleton<TableClient>(new TableClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING"), "SaltagramTable"));
+builder.Services.AddSingleton<TableServiceClient>();
+
+var serviceClient = new TableServiceClient(
+    new Uri(storageUri),
+    new TableSharedKeyCredential(accountName, storageAccountKey));
+string tableName = "CreatedWithCodeTable";
+
+TableItem table = serviceClient.CreateTableIfNotExists(tableName);
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
