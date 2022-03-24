@@ -16318,6 +16318,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/Views/Home/login.cshtml",
+      "TargetPath": "Views\\Home\\login.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/Views/Salt/SaltProfile.cshtml",
       "TargetPath": "Views\\Salt\\SaltProfile.cshtml",
       "FileKind": "mvc"

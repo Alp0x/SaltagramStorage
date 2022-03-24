@@ -47,9 +47,9 @@ public class SaltController : Controller
                 { "Name", "Table salt" },
                 { "Description", "A description" }
             };
-        _client.AddEntity(Salt);
         return View();
     }
+
     public IActionResult SaltProfile() // DETAILS WHERE U CAN UPDATE SPECIFIC SALT
     {
         return View(new Salt
@@ -60,4 +60,5 @@ public class SaltController : Controller
             SourceSize = "1000"
         });
     }
+
 }
