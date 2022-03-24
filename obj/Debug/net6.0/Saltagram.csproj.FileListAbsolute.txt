@@ -24,3 +24,8 @@
 /Users/salt-dev/Documents/SaltRepos/SaltagramStorage/obj/Debug/net6.0/Saltagram.pdb
 /Users/salt-dev/Documents/SaltRepos/SaltagramStorage/obj/Debug/net6.0/Saltagram.genruntimeconfig.cache
 /Users/salt-dev/Documents/SaltRepos/SaltagramStorage/obj/Debug/net6.0/ref/Saltagram.dll
+/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/bin/Debug/net6.0/Azure.Core.dll
+/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/bin/Debug/net6.0/Azure.Data.Tables.dll
+/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/bin/Debug/net6.0/Microsoft.Bcl.AsyncInterfaces.dll
+/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/bin/Debug/net6.0/System.Memory.Data.dll
+/Users/salt-dev/Documents/SaltRepos/SaltagramStorage/obj/Debug/net6.0/Saltagram.csproj.CopyComplete
