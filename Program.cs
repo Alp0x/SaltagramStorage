@@ -9,14 +9,13 @@ builder.Services.AddControllersWithViews();
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
+builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING")));
+builder.Services.AddSingleton<TableClient>(new TableClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING"), "SaltagramTable"));
 var app = builder.Build();
 
 // var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
 // var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME"); ;
 // var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
-
-builder.Services.AddSingleton<TableClient>(new TableClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING"), "SaltagramTable"));
-builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING")));
 
 // var serviceClient = new TableServiceClient(
 //     new Uri(storageUri),
