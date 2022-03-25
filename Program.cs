@@ -10,12 +10,20 @@ builder.Services.AddControllersWithViews();
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
-
-
-var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
 var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
 var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
 var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
+
+Console.WriteLine($"Showing Azure tables from {storageUri}");
+var serviceClient = new TableServiceClient(
+    new Uri(storageUri),
+    new TableSharedKeyCredential(accountName, storageAccountKey));
+
+string tableName = "CreatedWithCodeTable";
+TableItem table = serviceClient.CreateTableIfNotExists(tableName);
+Console.WriteLine($"The created table's name is {table.Name}.");
+Console.ReadLine();
+var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
 
 var tableClient = new TableClient(
 new Uri(storageUri),
