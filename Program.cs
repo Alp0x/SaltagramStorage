@@ -21,7 +21,7 @@ builder.Services.AddSingleton<TableClient>(new TableClient(
     "SaltagramTable",
     new TableSharedKeyCredential(accountName, storageAccountKey)
 ));
-builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(new Uri(storageUri), new TableSharedKeyCredential(accountName, storageAccountKey)));
+builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(connectionString));
 // Configure the HTTP request pipeline.
 var app = builder.Build();
 
