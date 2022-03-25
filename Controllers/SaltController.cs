@@ -3,9 +3,11 @@ using Azure.Data.Tables;
 public class SaltController : Controller
 {
     private readonly TableClient _client;
-    public SaltController(TableClient client)
+    private readonly TableServiceClient _serviceClient;
+    public SaltController(TableClient client, TableServiceClient serviceClient)
     {
         _client = client;
+        _serviceClient = serviceClient;
     }
     public IActionResult Index() //Welcomepage POST
     {

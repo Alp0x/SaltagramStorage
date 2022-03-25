@@ -14,14 +14,21 @@ builder.Services
 var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
 var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
 var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
+var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
 
 builder.Services.AddSingleton<TableClient>(new TableClient(
     new Uri(storageUri),
     "SaltagramTable",
     new TableSharedKeyCredential(accountName, storageAccountKey)
 ));
+builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(new Uri(storageUri), new TableSharedKeyCredential(accountName, storageAccountKey)));
 // Configure the HTTP request pipeline.
 var app = builder.Build();
+
+// var serviceClient = new TableServiceClient(
+// new Uri(storageUri),
+// new TableSharedKeyCredential(accountName, storageAccountKey));
+
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
