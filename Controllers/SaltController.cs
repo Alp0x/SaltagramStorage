@@ -27,17 +27,18 @@ public class SaltController : Controller
 
     public IActionResult Salts() //Salt Gallery List LIKE/COMMENTS    PATCH
     {
-        var salts = new List<Salt>();
+        // var salts = new List<Salt>();
 
         var table = _serviceClient.GetTableClient("SaltTable");
-        var tableItems = table.Query<Salt>(opt => opt.PartitionKey == "PartitionKey");
+        // var tableItems = table.Query<Salt>(opt => opt.PartitionKey == "PartitionKey");
+        var tableItem = table.GetEntityAsync<Salt>("PartitionKey", "09a7d128-14c2-484f-9108-2ad58cc8eccd");
 
-        foreach (var item in tableItems)
-        {
-            salts.Add(item);
-        }
+        // foreach (var item in tableItems)
+        // {
+        //     salts.Add(item);
+        // }
 
-        return View(salts);
+        return View(tableItem);
     }
 
     public IActionResult Location() //LOCATION WHERE EACH SALT CAN BE FOUND
