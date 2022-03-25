@@ -31,8 +31,7 @@ public class SaltController : Controller
 
         var table = _serviceClient.GetTableClient("SaltTable");
         // var tableItems = table.Query<Salt>(opt => opt.PartitionKey == "PartitionKey");
-        var tableItem = table.GetEntityAsync<Salt>("PartitionKey", "09a7d128-14c2-484f-9108-2ad58cc8eccd");
-
+        var tableItem = table.GetEntityAsync<Salt>("PartitionKey", "09a7d128-14c2-484f-9108-2ad58cc8eccd").Result.Value;
         // foreach (var item in tableItems)
         // {
         //     salts.Add(item);
