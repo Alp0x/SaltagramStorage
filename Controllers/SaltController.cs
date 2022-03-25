@@ -29,10 +29,9 @@ public class SaltController : Controller
     {
         // var salts = new List<Salt>();
 
-        var table = _serviceClient.GetTableClient("SaltTable");
+        var table = _serviceClient.GetTableClient("SaltagramTable");
         // var tableItems = table.Query<Salt>(opt => opt.PartitionKey == "PartitionKey");
-        var tableItem = table.GetEntity<Salt>("PartitionKey", "81b3ed1d-0e28-4d32-ab1d-39136b332b8b").Value;
-        // foreach (var item in tableItems)
+        var tableItem = table.Query<Salt>(e => e.PartitionKey == "PartitionKey");        // foreach (var item in tableItems)
         // {
         //     salts.Add(item);
         // }
