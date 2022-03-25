@@ -1,3 +1,4 @@
+using Azure;
 using Azure.Data.Tables;
 using Azure.Data.Tables.Models;
 using Microsoft.AspNetCore.Authentication.Cookies;
@@ -9,27 +10,41 @@ builder.Services.AddControllersWithViews();
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
-// builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING")));
+
+
+var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
 var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
 var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
 var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
-builder.Services.AddSingleton<TableClient>(new TableClient(new Uri(storageUri), "SaltagramTable", new TableSharedKeyCredential(accountName, storageAccountKey)));
 
-// var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-// var serviceClient = new TableServiceClient(
-//     new Uri(storageUri),
-//     new TableSharedKeyCredential(accountName, storageAccountKey));
-// string tableName = "SaltagramTable";
+var tableClient = new TableClient(
+new Uri(storageUri),
+"SaltagramTable",
+new TableSharedKeyCredential(accountName, storageAccountKey));
 
-// TableItem table = serviceClient.CreateTableIfNotExists(tableName);
+await tableClient.CreateIfNotExistsAsync();
 
-// var tableClient = new TableClient(
-// new Uri(storageUri),
-// "SaltagramTable",
-// new TableSharedKeyCredential(accountName, storageAccountKey));
+var partitionKey = "PartitionKey";
+var lastRowKey = "";
+for (int i = 0; i < 10; i++)
+{
+    var rowKey = Guid.NewGuid().ToString();
+    lastRowKey = rowKey;
+    var entity = new TableEntity(partitionKey, rowKey)
+  {
+      { "Name", "Marcus" },
+      { "Role", "Teacher" },
+      { "Skill", 0.8 * i }
+  };
+    tableClient.AddEntity(entity);
+}
 
-// tableClient.Create();
-
+System.Console.WriteLine("Reading dynamic data...");
+Pageable<TableEntity> queryResultsFilter = tableClient.Query<TableEntity>(filter: $"PartitionKey eq '{partitionKey}'");
+foreach (TableEntity qEntity in queryResultsFilter)
+{
+    Console.WriteLine($"{qEntity.GetString("Name")}: {qEntity.GetDouble("Skill")}");
+}
 // Configure the HTTP request pipeline.
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
@@ -51,3 +66,15 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+public class Employee : ITableEntity
+{
+    public string? Name { get; set; }
+    public string? Role { get; set; }
+    public double Skill { get; set; }
+    public string? PartitionKey { get; set; }
+    public string? RowKey { get; set; }
+    public DateTimeOffset? Timestamp { get; set; }
+    public ETag ETag { get; set; }
+    ETag ITableEntity.ETag { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+}
