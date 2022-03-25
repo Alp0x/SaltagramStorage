@@ -10,11 +10,13 @@ builder.Services.AddControllersWithViews();
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
-var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
-var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
-var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
 
 var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
+
+var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
+var storageUri2 = Environment.GetEnvironmentVariable("AZURE_TABLE_SALTTABLE_URI");
+var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
+var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
 
 var tableClient = new TableClient(
 new Uri(storageUri),
@@ -23,8 +25,8 @@ new TableSharedKeyCredential(accountName, storageAccountKey));
 await tableClient.CreateIfNotExistsAsync();
 
 var table2Client = new TableClient(
-new Uri(storageUri),
-"SaltTable2",
+new Uri(storageUri2),
+"SaltTable",
 new TableSharedKeyCredential(accountName, storageAccountKey));
 await table2Client.CreateIfNotExistsAsync();
 
