@@ -68,6 +68,7 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+app.UseDeveloperExceptionPage();
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
@@ -81,15 +82,3 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
-
-public class Employee : ITableEntity
-{
-    public string? Name { get; set; }
-    public string? Role { get; set; }
-    public double Skill { get; set; }
-    public string? PartitionKey { get; set; }
-    public string? RowKey { get; set; }
-    public DateTimeOffset? Timestamp { get; set; }
-    public ETag ETag { get; set; }
-    ETag ITableEntity.ETag { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-}
