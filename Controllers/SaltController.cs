@@ -1,5 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Azure.Data.Tables;
+using Azure;
+
 public class SaltController : Controller
 {
     private readonly TableClient _client;
@@ -14,23 +16,28 @@ public class SaltController : Controller
         return View();
     }
 
+    // // dynamic entities (<TableEntity>)
+    // Pageable<TableEntity> queryResultsFilter =
+    // tableClient.Query<TableEntity>
+    // (filter: $"PartitionKey eq '{partitionKey}'");
+
+    // // typed entities <POCO>
+    // Pageable<Employee> queryResultsLINQ =
+    // tableClient.Query<Employee>(ent => ent.Height >= 1.7);
+
     public IActionResult Salts() //Salt Gallery List LIKE/COMMENTS    PATCH
     {
-        return View(new Salt[]
+        var salts = new List<Salt>();
+
+        var table = _serviceClient.GetTableClient("SaltTable");
+        var tableItems = table.Query<Salt>("PartitionKey");
+
+        foreach (var item in tableItems)
         {
-            new Salt{
-                Name = "Good Salt",
-                GrainSize = "Big",
-                Description = "Salty looking salty tasting",
-                SourceSize = "1000000"
-            },
-            new Salt{
-                Name = "Better Salt",
-                GrainSize = "Gigantic",
-                Description = "Saltier looking saltier tasting",
-                SourceSize = "1000"
-            }
-        });
+            salts.Add(item);
+        }
+
+        return View(salts);
     }
 
     public IActionResult Location() //LOCATION WHERE EACH SALT CAN BE FOUND

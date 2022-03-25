@@ -4,12 +4,6 @@
 // CONNECT WITH ACCOUNT KEYCONNECT WITH ACCOUNT KEY
 // CONNECTION STRINGCONNECTION STRING
 
-// var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
-
-// var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
-// var storageUri2 = Environment.GetEnvironmentVariable("AZURE_TABLE_SALTTABLE_URI");
-// var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
-// var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
 
 // var tableClient = new TableClient(
 // new Uri(storageUri),
@@ -52,4 +46,19 @@
 // foreach (TableEntity qEntity in queryResultsFilter)
 // {
 //     Console.WriteLine($"{qEntity.GetString("Name")}: {qEntity.GetDouble("Skill")}");
-// }
+// // }
+// new Salt[]
+//         {
+//             new Salt{
+//                 Name = "Good Salt",
+//                 GrainSize = "Big",
+//                 Description = "Salty looking salty tasting",
+//                 SourceSize = "1000000"
+//             },
+//             new Salt{
+//                 Name = "Better Salt",
+//                 GrainSize = "Gigantic",
+//                 Description = "Saltier looking saltier tasting",
+//                 SourceSize = "1000"
+//             }
+//         }
