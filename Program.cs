@@ -14,23 +14,19 @@ var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
 var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
 var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
 
-Console.WriteLine($"Showing Azure tables from {storageUri}");
-var serviceClient = new TableServiceClient(
-    new Uri(storageUri),
-    new TableSharedKeyCredential(accountName, storageAccountKey));
-
-string tableName = "CreatedWithCodeTable";
-TableItem table = serviceClient.CreateTableIfNotExists(tableName);
-Console.WriteLine($"The created table's name is {table.Name}.");
-Console.ReadLine();
 var connectionString = Environment.GetEnvironmentVariable("AZURE_STORAGE_CONNECTION_STRING");
 
 var tableClient = new TableClient(
 new Uri(storageUri),
 "SaltagramTable",
 new TableSharedKeyCredential(accountName, storageAccountKey));
-
 await tableClient.CreateIfNotExistsAsync();
+
+var table2Client = new TableClient(
+new Uri(storageUri),
+"SaltTable2",
+new TableSharedKeyCredential(accountName, storageAccountKey));
+await table2Client.CreateIfNotExistsAsync();
 
 var partitionKey = "PartitionKey";
 var lastRowKey = "";
