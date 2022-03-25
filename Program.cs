@@ -11,6 +11,15 @@ builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options => { options.LoginPath = "/login"; });
 
+var storageUri = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_URI");
+var storageAccountKey = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_KEY");
+var accountName = Environment.GetEnvironmentVariable("AZURE_TABLE_STORAGE_ACCOUNT_NAME");
+
+builder.Services.AddSingleton<TableClient>(new TableClient(
+    new Uri(storageUri),
+    "SaltagramTable",
+    new TableSharedKeyCredential(accountName, storageAccountKey)
+));
 // Configure the HTTP request pipeline.
 var app = builder.Build();
 if (!app.Environment.IsDevelopment())
