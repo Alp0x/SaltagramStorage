@@ -28,11 +28,20 @@ new Uri(storageUri),
 new TableSharedKeyCredential(accountName, storageAccountKey));
 await table2Client.CreateIfNotExistsAsync();
 
+var rowKey = Guid.NewGuid().ToString();
 var partitionKey = "PartitionKey";
 var lastRowKey = "";
+
+var address = new TableEntity(partitionKey, rowKey)
+{
+    { "City", "Marcus" },
+    { "Street", "Teacher" },
+    { "Housenumber", 8 }
+};
+table2Client.AddEntity(address);
+
 for (int i = 0; i < 10; i++)
 {
-    var rowKey = Guid.NewGuid().ToString();
     lastRowKey = rowKey;
     var entity = new TableEntity(partitionKey, rowKey)
   {
