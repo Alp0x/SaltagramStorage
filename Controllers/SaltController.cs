@@ -30,7 +30,7 @@ public class SaltController : Controller
         var salts = new List<Salt>();
 
         var table = _serviceClient.GetTableClient("SaltTable");
-        var tableItems = table.Query<Salt>("PartitionKey");
+        var tableItems = table.Query<Salt>(opt => opt.PartitionKey == "PartitionKey");
 
         foreach (var item in tableItems)
         {
