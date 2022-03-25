@@ -21,7 +21,7 @@ builder.Services.AddSingleton<TableClient>(new TableClient(
     "SaltagramTable",
     new TableSharedKeyCredential(accountName, storageAccountKey)
 ));
-builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(connectionString));
+builder.Services.AddSingleton<TableServiceClient>(new TableServiceClient(new Uri("https://pearltuskstorage.table.core.windows.net/"), new TableSharedKeyCredential(accountName, storageAccountKey)));
 // Configure the HTTP request pipeline.
 var app = builder.Build();
 
